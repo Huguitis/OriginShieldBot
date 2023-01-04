@@ -1,2 +1,2 @@
 # OriginShieldBot
-Manage your Origin Shield registered domain settings with this discord bot.
+Manage your [OriginShield.net](OriginShield.net) registered domain settings with this discord bot.
