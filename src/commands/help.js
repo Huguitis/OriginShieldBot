@@ -8,9 +8,9 @@ $description[1;
 Manage your OriginShield.net registered domain settings with this bot!
 
 $getVar[InfoEmoji] **__Commands:__**
-\`$getVar[BotPrefix]setCredentials\`, \`$getVar[BotPrefix]manageDomain\`, \`$getVar[BotPrefix]help\`, \`$getVar[BotPrefix]eval\`]
+\`$getVar[BotPrefix]setCredentials\`, \`$getVar[BotPrefix]manageDomain\`, \`$getVar[BotPrefix]help\`, \`$getVar[BotPrefix]eval\`
 
 > **__Bot Repository:__ https://github.com/Huguitis/OriginShieldBot **
-> **__Bot Invite:__ $getBotInvite[admin] **
+> **__Bot Invite:__ $getBotInvite[admin] **]
 `
 }]
