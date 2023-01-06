@@ -23,13 +23,15 @@ $filterMessage[$nonEscape[$message[1]];https://;http://]
 
 > **Note:**  *We have setup general rules that contains 99% of the known patterns involved in website vulnerabilities like Nginx Anti XSS & SQL Injections, if your application requires more customisation, please create a ticket.*]
 
-$onlyIf[$getObjectProperty[output]!=403 error;{"embeds" : "{newEmbed:{color:RED}{description:$getVar[ErrorEmoji] **__Your credentials are not longer valid.__ Please reset them with the command \`$getVar[BotPrefix]setCredentials\`.**}}","ephemeral" : true,"options" : {"interaction" : true}}]
+$onlyIf[$checkContains[$message[1];https://;http://]!=true;{newEmbed:{description:$getVar[ErrorEmoji] **Please do not include \`https://\` or \`http://\` in the message!**}{color:RED}}]
+
+$onlyIf[$message[1]!=;{newEmbed:{color:RED}{description:$getVar[ErrorEmoji] **__Please include your domain in the message.**}}]
+
+$onlyIf[$getObjectProperty[output]!=403 error;{newEmbed:{color:RED}{description:$getVar[ErrorEmoji] **__Your credentials are not longer valid.__ Please reset them with the command \`$getVar[BotPrefix]setCredentials\`.**}}]
 
 $createObject[$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/hello;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $onlyIf[$getGlobalUserVar[OriginShieldApiKey]!=None;{newEmbed:{description:$getVar[ErrorEmoji] **__You need to set your Origin Shield api credentials first!__ To do it, use \`$getVar[BotPrefix]setCredentials\`**}{color:RED}}]
-
-$onlyIf[$checkContains[$message[1];https://;http://]!=true;{newEmbed:{description:$getVar[ErrorEmoji] **Please do not include \`https://\` in the message!**}{color:RED}}]
 `
 }, {
 type: "interaction",
