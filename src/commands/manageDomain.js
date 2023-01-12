@@ -63,11 +63,13 @@ $interactionUpdate[;{newEmbed:{color:YELLOW}{description:
 > $getVar[InfoEmoji] **__Switch between security modes:__**
 • **Available Modes:**
 - \`None\`: OriginShield is essentially switched off.
+- \`Low\`: OriginShield is active but invisible, this method uses HTTP response headers to block bots and DDoS attacks. Can block 75% of the attacks.
 - \`Medium\`: OriginShield is active but invisible, Javascript challenge enabled, can block 90% of the attacks **(Recommended)**.
 - \`High\`: OriginShield is active, Javascript challenge and captcha v2 enabled, can block 99.9% of the attacks.
 > **Note:** *OriginShield automatically switches between these modes when your website is attacked, it will choose the right mode depending on the size of the attack.*
 }};
-{actionRow:{button:None:primary:None_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Medium:primary:Medium_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{actionRow:{button:None:primary:None_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Low:primary:Low_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Medium:primary:Medium_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
 {button:High:primary:High_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
     
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{"embeds" : "{newEmbed:{description:$getVar[ErrorEmoji] **You cannot use this button!**}{color:RED}}","ephemeral" : true,"options" : {"interaction" : true}}]
@@ -349,6 +351,20 @@ $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShi
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{"embeds" : "{newEmbed:{description:$getVar[ErrorEmoji] **You cannot use this button!**}{color:RED}}","ephemeral" : true,"options" : {"interaction" : true}}]
 $suppressErrors[{"embeds" : "{newEmbed:{description:$getVar[ErrorEmoji] **__Something went wrong.__** Please contact us.}{color:RED}}","ephemeral" : true,"options" : {"interaction" : true}}]
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==None;]
+`
+}, {
+type: "interaction",
+prototype: "button",
+code: `
+$interactionUpdate[;{newEmbed:{color:GREEN}{description:
+> $getVar[SuccessEmoji] **__Successfully switched security mode to \`Low\`!__**
+OriginShield now is active but invisible, this method uses HTTP response headers to block bots and DDoS attacks. Can block 75% of the attacks.
+}};
+{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+$let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/low;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{"embeds" : "{newEmbed:{description:$getVar[ErrorEmoji] **You cannot use this button!**}{color:RED}}","ephemeral" : true,"options" : {"interaction" : true}}]
+$suppressErrors[{"embeds" : "{newEmbed:{description:$getVar[ErrorEmoji] **__Something went wrong.__** Please contact us.}{color:RED}}","ephemeral" : true,"options" : {"interaction" : true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Low;]
 `
 }, {
 type: "interaction",
