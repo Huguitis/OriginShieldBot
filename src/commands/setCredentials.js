@@ -2,8 +2,8 @@ module.exports = [{
 name: "setCredentials",
 code: `
 $addButton[1;Continue;success;SetCredentials_$authorID;no]
-$color[1;YELLOW]
-$description[1;$getVar[InfoEmoji] **__Set your OriginShield credentials:__**
+$color[1;Yellow]
+$description[1;$nonEscape[$getVar[InfoEmoji]] **__Set your OriginShield credentials:__**
 
 For this, you will need to provide 2 things. You can obtain them on your client area.
 - API Key
@@ -24,7 +24,7 @@ $interactionModal[Set Credentials;setCredentialsForm;
     }
 ]
     
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{"embeds" : "{newEmbed:{description:$getVar[ErrorEmoji] **You cannot use this button!**}{color:RED}}","ephemeral" : true,"options" : {"interaction" : true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==SetCredentials;]
 `
@@ -33,19 +33,19 @@ type: "interaction",
 name: "setCredentialsForm",
 prototype: 'modal',
 code: `
-$interactionUpdate[;{newEmbed:{color:GREEN}{description:
-> **__Logged In Successfully!__** $getVar[SuccessEmoji]
+$interactionUpdate[;{newEmbed:{color:Green}{description:
+> **__Logged In Successfully!__** $nonEscape[$getVar[SuccessEmoji]]
 
 **Thanks for using Origin Shield.**}}]
 
 $setGlobalUserVar[OriginShieldApiKey;$textInputValue[apikeyInput]]
 $setGlobalUserVar[OriginShieldApiPort;$textInputValue[apiportInput]]
 
-$onlyIf[$getObjectProperty[output]!=403 error;{"embeds" : "{newEmbed:{color:RED}{description:$getVar[ErrorEmoji] **__Your credentials are not valid.__ Please check them and then execute again the command.**}}","ephemeral" : true,"options" : {"interaction" : true}}]
+$onlyIf[$getObjectProperty[output]!=403 error;{{newEmbed:{color:Red}{description:$nonEscape[$getVar[ErrorEmoji]] **__Your credentials are not valid.__ Please check them and then execute again the command.**}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $createObject[$httpRequest[http://api.originshield.net:$textInputValue[apiportInput]/api/hello;GET;;;;{"Authorization": "Bearer $textInputValue[apikeyInput]"}]]
 
-$onlyIf[$isNumber[$textInputValue[apiportInput]]!=false;{"embeds" : "{newEmbed:{color:RED}{description:$getVar[ErrorEmoji] **__Your port is not valid.__ Please check it and then execute again the command.**}}","ephemeral" : true,"options" : {"interaction" : true}}]
+$onlyIf[$isNumber[$textInputValue[apiportInput]]!=false;{newEmbed:{color:Red}{description:$nonEscape[$getVar[ErrorEmoji]] **__Your port is not valid.__ Please check it and then execute again the command.**}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $suppressErrors
 `
