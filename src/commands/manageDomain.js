@@ -1,6 +1,7 @@
 module.exports = [{
 name: "manageDomain",
 code: `
+$addButton[2;Domain Stats;success;DomainStats_$authorID_$filterMessage[$nonEscape[$message[1]];https://;http://];no]
 $addButton[2;IP Whitelist;primary;IPWhitelist_$authorID_$filterMessage[$nonEscape[$message[1]];https://;http://];no]
 $addButton[1;Country Blacklist;primary;CountryBlacklist_$authorID_$filterMessage[$nonEscape[$message[1]];https://;http://];no]
 $addButton[1;WAF;primary;WAF_$authorID_$filterMessage[$nonEscape[$message[1]];https://;http://];no]
@@ -34,7 +35,7 @@ $onlyIf[$getGlobalUserVar[OriginShieldApiKey]!=None;{newEmbed:{description:$nonE
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{footer:Developed by Huguitis#4583}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed by Huguitis#4583}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Manage your OriginShield domain#COLON#__**
 $advancedTextSplit[$interactionData[customId];_;3]
 • **Available Options#COLON#**
@@ -51,9 +52,12 @@ $advancedTextSplit[$interactionData[customId];_;3]
 {button:Cache:primary:Cache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
 {button:WAF:primary:WAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
 {button:Country Blacklist:primary:CountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}
-{actionRow:{button:IP Whitelist:primary:IPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}]
+{actionRow:{button:IP Whitelist:primary:IPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Domain Stats:success:DomainStats_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+
+$let[RemoveObject;$interactionDeferUpdate]
+
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==GoBack;]
 `
@@ -64,7 +68,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==GoBack;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Switch between security modes#COLON#__**
 • **Available Modes#COLON#**
 - \`None\`#COLON# OriginShield is essentially switched off.
@@ -76,7 +80,9 @@ $interactionUpdate[;{newEmbed:{color:Yellow}{description:
 {actionRow:{button:None:primary:None_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
 {button:Low:primary:Low_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Medium:primary:Medium_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
 {button:High:primary:High_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
+
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==SecurityMode;]
@@ -85,14 +91,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==SecurityMode;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Enable/Disable Force SSL#COLON#__**
 • **Available Options#COLON#**
 - \`Enable\`#COLON# Enable Force SSL for the domain.
 - \`Disable\`#COLON# Disable Force SSL for the domain.
 }};
 {actionRow:{button:Enable:success:EnableForceSSL_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableForceSSL_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
+
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==ForceSSL;]
@@ -101,14 +109,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==ForceSSL;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Enable/Disable Cache#COLON#__**
 • **Available Options#COLON#**
 - \`Enable\`#COLON# Enable Cache for the domain.
 - \`Disable\`#COLON# Disable Cache for the domain.
 }};
 {actionRow:{button:Enable:success:EnableCache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableCache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
+
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Cache;]
@@ -117,14 +127,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Cache;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Enable/Disable WAF#COLON#__**
 • **Available Options#COLON#**
 - \`Enable\`#COLON# Enable WAF for the domain.
 - \`Disable\`#COLON# Disable WAF for the domain.
 }};
 {actionRow:{button:Enable:success:EnableWAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableWAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
+
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==WAF;]
@@ -133,7 +145,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==WAF;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Add/Remove Country to Blacklist#COLON#__**
 • **Available Options#COLON#**
 - \`Add\`#COLON# Adds a Country to Blacklist.
@@ -142,7 +154,9 @@ $interactionUpdate[;{newEmbed:{color:Yellow}{description:
 > *You can see the available Alpha-2 codes [here](https://www.iban.com/country-codes).*
 }};
 {actionRow:{button:Add:success:AddCountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Remove:danger:RemoveCountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
+
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==CountryBlacklist;]
@@ -151,14 +165,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==CountryBlacklist;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Add/Remove IP to Whitelist#COLON#__**
 • **Available Options#COLON#**
 - \`Add\`#COLON# Adds an IP to Whitelist.
 - \`Remove\`#COLON# Removes an IP from Whitelist.
 }};
 {actionRow:{button:Add:success:AddIPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Remove:danger:RemoveIPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
-    
+
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
         
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==IPWhitelist;]
@@ -170,9 +186,11 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==IPWhitelist;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:> **Please __send__ the IPv4 or IPv6 you want to whitelist, remember to include the subnet size (CIDR)**
+$interactionEdit[;{newEmbed:{color:Yellow}{description:> **Please __send__ the IPv4 or IPv6 you want to whitelist, remember to include the subnet size (CIDR)**
 **For example, 90.164.2.122/32**
 ***Subnet Cheat Sheet#COLON#***}{image:https://cdn.discordapp.com/attachments/924788187539316777/1060991415930335242/subnets-2.png.webp}}]
+
+$let[RemoveObject;$interactionDeferUpdate]
 
 $awaitMessages[$channelID;$authorID;2m;everything;addipwhitelist;{newEmbed:{color:Red}{description:$nonEscape[$getVar[ErrorEmoji]] **Out of time.**}};{"Domain": "$advancedTextSplit[$interactionData[customId];_;3]"}]
 
@@ -187,16 +205,16 @@ code: `
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully added \`$message[1]\` to the whitelist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/whitelist_IP/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
-
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 `
 }, {
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:> **Please __send__ the IPv4 or IPv6 you want to remove from whitelist, remember to include the subnet size (CIDR)**
+$interactionEdit[;{newEmbed:{color:Yellow}{description:> **Please __send__ the IPv4 or IPv6 you want to remove from whitelist, remember to include the subnet size (CIDR)**
 **For example, 90.164.2.122/32**
 ***Subnet Cheat Sheet#COLON#***}{image:https://cdn.discordapp.com/attachments/924788187539316777/1060991415930335242/subnets-2.png.webp}}]
+
+$let[RemoveObject;$interactionDeferUpdate]
 
 $awaitMessages[$channelID;$authorID;2m;everything;removeipwhitelist;{newEmbed:{color:Red}{description:$nonEscape[$getVar[ErrorEmoji]] **Out of time.**}};{"Domain": "$advancedTextSplit[$interactionData[customId];_;3]"}]
 
@@ -211,8 +229,6 @@ code: `
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully removed \`$message[1]\` from the whitelist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/remove_whitelist_IP/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
-
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 `
 
 
@@ -221,9 +237,11 @@ $suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Somet
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:> **Please __send__ the country you want to blacklist as the Alpha-2 code.**
+$interactionEdit[;{newEmbed:{color:Yellow}{description:> **Please __send__ the country you want to blacklist as the Alpha-2 code.**
 **For example, ES (For Spain)**
 ***Alpha-2 Codes#COLON#*** https://www.iban.com/country-codes}}]
+
+$let[RemoveObject;$interactionDeferUpdate]
 
 $awaitMessages[$channelID;$authorID;2m;everything;addcountryblacklist;{newEmbed:{color:Red}{description:$nonEscape[$getVar[ErrorEmoji]] **Out of time.**}};{"Domain": "$advancedTextSplit[$interactionData[customId];_;3]"}]
 
@@ -238,16 +256,16 @@ code: `
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully added \`$message[1]\` to the blacklist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/blacklist_country/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
-
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 `
 }, {
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Yellow}{description:> **Please __send__ the country you want to remove from blacklist as the Alpha-2 code.**
+$interactionEdit[;{newEmbed:{color:Yellow}{description:> **Please __send__ the country you want to remove from blacklist as the Alpha-2 code.**
 **For example, ES (For Spain)**
 ***Alpha-2 Codes#COLON#*** https://www.iban.com/country-codes}}]
+
+$let[RemoveObject;$interactionDeferUpdate]
 
 $awaitMessages[$channelID;$authorID;2m;everything;removecountryblacklist;{newEmbed:{color:Red}{description:$nonEscape[$getVar[ErrorEmoji]] **Out of time.**}};{"Domain": "$advancedTextSplit[$interactionData[customId];_;3]"}]
 
@@ -262,8 +280,6 @@ code: `
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully removed \`$message[1]\` from the blacklist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/remove_blacklist_country/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
-
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 `
 
 
@@ -272,15 +288,15 @@ $suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Somet
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__WAF is now \`Enabled\`!__**
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/enable_waf/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableWAF;]
 `
@@ -288,15 +304,15 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableWAF;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__WAF is now \`Disabled\`!__**
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/disable_waf/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableWAF;]
 `
@@ -307,15 +323,15 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableWAF;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Cache is now \`Enabled\`!__**
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/enable_cache/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableCache;]
 `
@@ -323,15 +339,15 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableCache;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Cache is now \`Disabled\`!__**
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/disable_cache/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableCache;]
 `
@@ -342,15 +358,15 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableCache;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Force SSL is now \`Enabled\`!__**
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/enable_force_ssl/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableForceSSL;]
 `
@@ -358,15 +374,15 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableForceSSL;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Force SSL is now \`Disabled\`!__**
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/disable_force_ssl/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableForceSSL;]
 `
@@ -377,16 +393,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableForceSSL;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`None\`!__**
 OriginShield now is essentially switched off.
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/none;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==None;]
 `
@@ -394,16 +410,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==None;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`Low\`!__**
 OriginShield now is active but invisible, this method uses HTTP response headers to block bots and DDoS attacks. Can block 75% of the attacks.
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/low;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Low;]
 `
@@ -411,16 +427,16 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Low;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`Medium\`!__**
 OriginShield now is active but invisible, Javascript challenge enabled, can block 90% of the attacks.
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/medium;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
-$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$let[RemoveObject;$interactionDeferUpdate]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Medium;]
 `
@@ -428,17 +444,41 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Medium;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionUpdate[;{newEmbed:{color:Green}{description:
+$interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`High\`!__**
 OriginShield now is active, Javascript challenge and captcha v2 enabled, can block 99.9% of the attacks.
 }};
 {actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/high;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
+$let[RemoveObject;$interactionDeferUpdate]
+
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
 
-$suppressErrors[{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **__Something went wrong.__** Please contact us.}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
-
 $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==High;]
+`
+}, {
+type: "interaction",
+prototype: "button",
+code: `
+$interactionEdit[;{newEmbed:{color:Green}{description:
+> $nonEscape[$getVar[SuccessEmoji]] **__Domain Status:__**
+
+**- __Total Requests:__** $getObjectProperty[requestCounter]
+**- __2xx Responses:__** $getObjectProperty[responses2xx]
+**- __3xx Responses:__** $getObjectProperty[responses3xx]
+**- __4xx Responses:__** $getObjectProperty[responses4xx]
+**- __5xx Responses:__** $getObjectProperty[responses5xx]
+
+**- __Requests per second:__** $httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/requests/$advancedTextSplit[$interactionData[customId];_;3];GET;;requestPerSecond;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]}};
+{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+
+$let[RemoveObject;$interactionDeferUpdate]
+
+$createObject[$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/stats/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
+
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;2]==$interactionData[author.id];{newEmbed:{description:$nonEscape[$getVar[ErrorEmoji]] **You cannot use this button!**}{color:Red}}{options:{ephemeral: true}}{extraOptions:{interaction: true}}]
+
+$onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DomainStats;]
 `
 }]
