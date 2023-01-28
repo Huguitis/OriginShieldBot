@@ -9,6 +9,7 @@ token: setting.BotToken,
 prefix: setting.BotPrefix,
 intents: ["MessageContent", "Guilds", "GuildMembers", "GuildMessages"],
 disableLogs: true,
+suppressAllErrors: true,
  database: {
   type : "aoi.db",
   db : require("aoi.db"),
