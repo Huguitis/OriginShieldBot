@@ -3,7 +3,7 @@ name: "help",
 aliases: "commands",
 code: `
 $footer[1;Developed by Huguitis#4583]
-$color[1;GREEN]
+$color[1;Green]
 $description[1;
 Manage your OriginShield.net registered domain settings with this bot!
 
