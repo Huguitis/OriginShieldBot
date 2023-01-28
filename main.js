@@ -1,10 +1,14 @@
 const aoijs = require("aoi.js")
 const setting = require("./settings.js")
+const { Util } = require("aoi.js");
+const { setup } = require("aoi.parser");
+setup(Util);
 
 const bot = new aoijs.AoiClient({
 token: setting.BotToken,
 prefix: setting.BotPrefix,
-intents: "all",
+intents: ["MessageContent", "Guilds", "GuildMembers", "GuildMessages"],
+disableLogs: true,
  database: {
   type : "aoi.db",
   db : require("aoi.db"),
@@ -60,23 +64,10 @@ loader.setColors({
 })
 
 // Variables
-bot.variables({
-BotPrefix: setting.BotPrefix,
-SuccessEmoji: setting.SuccessEmoji,
-ErrorEmoji: setting.ErrorEmoji,
-InfoEmoji: setting.InfoEmoji,
-
-OriginShieldApiKey: "None",
-OriginShieldApiPort: "None"
-})
-
+bot.variables(require("./variables.js"));
 
 // Custom Functions:
-const Interpreter = require("./node_modules/aoi.js/src/interpreter.js");
-const {CheckCondition} = require("./node_modules/aoi.js/src/utils/helpers/checkCondition.js");
-const {mustEscape} = require("./node_modules/aoi.js/src/utils/helpers/mustEscape.js");
-
-bot.functionManager.createCustomFunction({
+bot.functionManager.createFunction({
  name: "$httpStatus",
  type: "djs",
  code: async d => {
