@@ -7,7 +7,7 @@ setup(Util);
 const bot = new aoijs.AoiClient({
 token: setting.BotToken,
 prefix: setting.BotPrefix,
-intents: ["MessageContent", "Guilds", "GuildMembers", "GuildMessages"],
+intents: ["MessageContent", "Guilds", "GuildMembers", "GuildMessages", "GuildBans", "GuildEmojisAndStickers", "GuildIntegrations", "GuildWebhooks", "GuildInvites", "GuildVoiceStates", "GuildPresences", "GuildMessageReactions", "GuildMessageTyping", "DirectMessages", "DirectMessageReactions", "DirectMessageTyping"],
 disableLogs: true,
 suppressAllErrors: true,
  database: {
