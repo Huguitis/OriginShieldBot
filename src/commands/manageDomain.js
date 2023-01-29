@@ -12,6 +12,7 @@ $footer[1;Developed by Huguitis#4583]
 $color[1;Yellow]
 $description[1;> $nonEscape[$getVar[InfoEmoji]] **__Manage your OriginShield domain:__**
 $filterMessage[$nonEscape[$message[1]];https://;http://]
+
 • **Available Options:**
 - \`Security Mode\`: Switch between security modes.
 - \`Force SSL\`: Enable/Disable Force SSL.
@@ -38,6 +39,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed by Huguitis#4583}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Manage your OriginShield domain#COLON#__**
 $advancedTextSplit[$interactionData[customId];_;3]
+
 • **Available Options#COLON#**
 - \`Security Mode\`#COLON# Switch between security modes.
 - \`Force SSL\`#COLON# Enable/Disable Force SSL.
@@ -79,7 +81,8 @@ $interactionEdit[;{newEmbed:{color:Yellow}{description:
 }};
 {actionRow:{button:None:primary:None_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
 {button:Low:primary:Low_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Medium:primary:Medium_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
-{button:High:primary:High_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{button:High:primary:High_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
@@ -97,7 +100,8 @@ $interactionEdit[;{newEmbed:{color:Yellow}{description:
 - \`Enable\`#COLON# Enable Force SSL for the domain.
 - \`Disable\`#COLON# Disable Force SSL for the domain.
 }};
-{actionRow:{button:Enable:success:EnableForceSSL_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableForceSSL_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Enable:success:EnableForceSSL_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableForceSSL_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
@@ -115,7 +119,8 @@ $interactionEdit[;{newEmbed:{color:Yellow}{description:
 - \`Enable\`#COLON# Enable Cache for the domain.
 - \`Disable\`#COLON# Disable Cache for the domain.
 }};
-{actionRow:{button:Enable:success:EnableCache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableCache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Enable:success:EnableCache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableCache_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
@@ -133,7 +138,8 @@ $interactionEdit[;{newEmbed:{color:Yellow}{description:
 - \`Enable\`#COLON# Enable WAF for the domain.
 - \`Disable\`#COLON# Disable WAF for the domain.
 }};
-{actionRow:{button:Enable:success:EnableWAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableWAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Enable:success:EnableWAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Disable:danger:DisableWAF_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
@@ -153,7 +159,8 @@ $interactionEdit[;{newEmbed:{color:Yellow}{description:
 > **Note#COLON#** *Country must be entered with it's Alpha-2 code.*
 > *You can see the available Alpha-2 codes [here](https://www.iban.com/country-codes).*
 }};
-{actionRow:{button:Add:success:AddCountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Remove:danger:RemoveCountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Add:success:AddCountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Remove:danger:RemoveCountryBlacklist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
@@ -171,7 +178,8 @@ $interactionEdit[;{newEmbed:{color:Yellow}{description:
 - \`Add\`#COLON# Adds an IP to Whitelist.
 - \`Remove\`#COLON# Removes an IP from Whitelist.
 }};
-{actionRow:{button:Add:success:AddIPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Remove:danger:RemoveIPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Add:success:AddIPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}{button:Remove:danger:RemoveIPWhitelist_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}
+{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
@@ -202,6 +210,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==AddIPWhitelist;]
 type: "awaited",
 name: "addipwhitelist",
 code: `
+$addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully added \`$message[1]\` to the whitelist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/whitelist_IP/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -226,6 +235,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==RemoveIPWhitelist;]
 type: "awaited",
 name: "removeipwhitelist",
 code: `
+$addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully removed \`$message[1]\` from the whitelist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/remove_whitelist_IP/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -253,6 +263,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==AddCountryBlacklist;
 type: "awaited",
 name: "addcountryblacklist",
 code: `
+$addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully added \`$message[1]\` to the blacklist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/blacklist_country/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -277,6 +288,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==RemoveCountryBlackli
 type: "awaited",
 name: "removecountryblacklist",
 code: `
+$addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully removed \`$message[1]\` from the blacklist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/remove_blacklist_country/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -291,7 +303,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__WAF is now \`Enabled\`!__**
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/enable_waf/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -307,7 +319,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__WAF is now \`Disabled\`!__**
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/disable_waf/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -326,7 +338,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Cache is now \`Enabled\`!__**
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/enable_cache/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -342,7 +354,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Cache is now \`Disabled\`!__**
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/disable_cache/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -361,7 +373,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Force SSL is now \`Enabled\`!__**
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/enable_force_ssl/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -377,7 +389,7 @@ code: `
 $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Force SSL is now \`Disabled\`!__**
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/disable_force_ssl/$advancedTextSplit[$interactionData[customId];_;3];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -397,7 +409,7 @@ $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`None\`!__**
 OriginShield now is essentially switched off.
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/none;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -414,7 +426,7 @@ $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`Low\`!__**
 OriginShield now is active but invisible, this method uses HTTP response headers to block bots and DDoS attacks. Can block 75% of the attacks.
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/low;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -431,7 +443,7 @@ $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`Medium\`!__**
 OriginShield now is active but invisible, Javascript challenge enabled, can block 90% of the attacks.
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/medium;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -448,7 +460,7 @@ $interactionEdit[;{newEmbed:{color:Green}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`High\`!__**
 OriginShield now is active, Javascript challenge and captcha v2 enabled, can block 99.9% of the attacks.
 }};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/switch_security/$advancedTextSplit[$interactionData[customId];_;3]/high;GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
 $let[RemoveObject;$interactionDeferUpdate]
@@ -471,7 +483,7 @@ $interactionEdit[;{newEmbed:{color:Green}{description:
 **- __5xx Responses:__** $getObjectProperty[responses5xx]
 
 **- __Requests per second:__** $httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/requests/$advancedTextSplit[$interactionData[customId];_;3];GET;;requestPerSecond;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]}};
-{actionRow:{button:Go Back:primary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
+{actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
 
 $let[RemoveObject;$interactionDeferUpdate]
 
