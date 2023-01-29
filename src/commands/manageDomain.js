@@ -10,6 +10,7 @@ $addButton[1;Force SSL;primary;ForceSSL_$authorID_$filterMessage[$nonEscape[$mes
 $addButton[1;Security Mode;primary;SecurityMode_$authorID_$filterMessage[$nonEscape[$message[1]];https://;http://];no]
 $footer[1;Developed By Huguitis#4583 | Command Executed By $userTag]
 $color[1;Yellow]
+$thumbnail[1;$userAvatar[$authorID]]
 $description[1;> $nonEscape[$getVar[InfoEmoji]] **__Manage your OriginShield domain:__**
 $filterMessage[$nonEscape[$message[1]];https://;http://]
 
@@ -36,7 +37,7 @@ $onlyIf[$getGlobalUserVar[OriginShieldApiKey]!=None;{newEmbed:{description:$nonE
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Manage your OriginShield domain#COLON#__**
 $advancedTextSplit[$interactionData[customId];_;3]
 
@@ -70,7 +71,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==GoBack;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Switch between security modes#COLON#__**
 • **Available Modes#COLON#**
 - \`None\`#COLON# OriginShield is essentially switched off.
@@ -94,7 +95,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==SecurityMode;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Enable/Disable Force SSL#COLON#__**
 • **Available Options#COLON#**
 - \`Enable\`#COLON# Enable Force SSL for the domain.
@@ -113,7 +114,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==ForceSSL;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Enable/Disable Cache#COLON#__**
 • **Available Options#COLON#**
 - \`Enable\`#COLON# Enable Cache for the domain.
@@ -132,7 +133,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Cache;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Enable/Disable WAF#COLON#__**
 • **Available Options#COLON#**
 - \`Enable\`#COLON# Enable WAF for the domain.
@@ -151,7 +152,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==WAF;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Add/Remove Country to Blacklist#COLON#__**
 • **Available Options#COLON#**
 - \`Add\`#COLON# Adds a Country to Blacklist.
@@ -172,7 +173,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==CountryBlacklist;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
 > $nonEscape[$getVar[InfoEmoji]] **__Add/Remove IP to Whitelist#COLON#__**
 • **Available Options#COLON#**
 - \`Add\`#COLON# Adds an IP to Whitelist.
@@ -194,7 +195,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==IPWhitelist;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:> **Please __send__ the IPv4 or IPv6 you want to whitelist, remember to include the subnet size (CIDR)**
+$interactionEdit[;{newEmbed:{color:Yellow}{thumbnail:$userAvatar[$authorID]}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:> **Please __send__ the IPv4 or IPv6 you want to whitelist, remember to include the subnet size (CIDR)**
 **For example, 90.164.2.122/32**
 ***Subnet Cheat Sheet#COLON#***}{image:https://cdn.discordapp.com/attachments/924788187539316777/1060991415930335242/subnets-2.png.webp}}]
 
@@ -212,6 +213,7 @@ name: "addipwhitelist",
 code: `
 $addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
+$thumbnail[1;$userAvatar[$authorID]]
 $footer[1;Developed By Huguitis#4583 | Command Executed By $userTag]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully added \`$message[1]\` to the whitelist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/whitelist_IP/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -220,7 +222,7 @@ $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShi
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{color:Yellow}{description:> **Please __send__ the IPv4 or IPv6 you want to remove from whitelist, remember to include the subnet size (CIDR)**
+$interactionEdit[;{newEmbed:{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{color:Yellow}{description:> **Please __send__ the IPv4 or IPv6 you want to remove from whitelist, remember to include the subnet size (CIDR)**
 **For example, 90.164.2.122/32**
 ***Subnet Cheat Sheet#COLON#***}{image:https://cdn.discordapp.com/attachments/924788187539316777/1060991415930335242/subnets-2.png.webp}}]
 
@@ -238,6 +240,7 @@ name: "removeipwhitelist",
 code: `
 $addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
+$thumbnail[1;$userAvatar[$authorID]]
 $footer[1;Developed By Huguitis#4583 | Command Executed By $userTag]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully removed \`$message[1]\` from the whitelist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/remove_whitelist_IP/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -249,7 +252,7 @@ $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShi
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:> **Please __send__ the country you want to blacklist as the Alpha-2 code.**
+$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:> **Please __send__ the country you want to blacklist as the Alpha-2 code.**
 **For example, ES (For Spain)**
 ***Alpha-2 Codes#COLON#*** https://www.iban.com/country-codes}}]
 
@@ -267,6 +270,7 @@ name: "addcountryblacklist",
 code: `
 $addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
+$thumbnail[1;$userAvatar[$authorID]]
 $footer[1;Developed By Huguitis#4583 | Command Executed By $userTag]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully added \`$message[1]\` to the blacklist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/blacklist_country/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -275,7 +279,7 @@ $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShi
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:> **Please __send__ the country you want to remove from blacklist as the Alpha-2 code.**
+$interactionEdit[;{newEmbed:{color:Yellow}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:> **Please __send__ the country you want to remove from blacklist as the Alpha-2 code.**
 **For example, ES (For Spain)**
 ***Alpha-2 Codes#COLON#*** https://www.iban.com/country-codes}}]
 
@@ -293,6 +297,7 @@ name: "removecountryblacklist",
 code: `
 $addButton[1;Go Back;secondary;GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3];no]
 $color[1;Green]
+$thumbnail[1;$userAvatar[$authorID]]
 $footer[1;Developed By Huguitis#4583 | Command Executed By $userTag]
 $description[1;> $nonEscape[$getVar[SuccessEmoji]] **__Successfully removed \`$message[1]\` from the blacklist!__**]
 $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/remove_blacklist_country/$awaitData[Domain]/$message[1];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
@@ -304,7 +309,7 @@ $let[Remove;$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShi
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__WAF is now \`Enabled\`!__**
 }};
 {actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
@@ -320,7 +325,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableWAF;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__WAF is now \`Disabled\`!__**
 }};
 {actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
@@ -339,7 +344,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableWAF;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Cache is now \`Enabled\`!__**
 }};
 {actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
@@ -355,7 +360,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableCache;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Cache is now \`Disabled\`!__**
 }};
 {actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
@@ -374,7 +379,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableCache;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Force SSL is now \`Enabled\`!__**
 }};
 {actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
@@ -390,7 +395,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==EnableForceSSL;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Force SSL is now \`Disabled\`!__**
 }};
 {actionRow:{button:Go Back:secondary:GoBack_$authorID_$advancedTextSplit[$interactionData[customId];_;3]}}]
@@ -409,7 +414,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==DisableForceSSL;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`None\`!__**
 OriginShield now is essentially switched off.
 }};
@@ -426,7 +431,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==None;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`Low\`!__**
 OriginShield now is active but invisible, this method uses HTTP response headers to block bots and DDoS attacks. Can block 75% of the attacks.
 }};
@@ -443,7 +448,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Low;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`Medium\`!__**
 OriginShield now is active but invisible, Javascript challenge enabled, can block 90% of the attacks.
 }};
@@ -460,7 +465,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==Medium;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Successfully switched security mode to \`High\`!__**
 OriginShield now is active, Javascript challenge and captcha v2 enabled, can block 99.9% of the attacks.
 }};
@@ -477,7 +482,7 @@ $onlyIf[$advancedTextSplit[$interactionData[customId];_;1]==High;]
 type: "interaction",
 prototype: "button",
 code: `
-$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{description:
+$interactionEdit[;{newEmbed:{color:Green}{footer:Developed By Huguitis#4583 | Command Executed By $userTag}{thumbnail:$userAvatar[$authorID]}{description:
 > $nonEscape[$getVar[SuccessEmoji]] **__Domain Status:__**
 
 **- __Total Requests:__** $getObjectProperty[requestCounter]
