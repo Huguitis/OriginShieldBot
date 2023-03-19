@@ -8,5 +8,6 @@ module.exports = {
 
   OriginShieldApiKey: "None",
   OriginShieldApiPort: "None",
-  ActiveStatus: "No"
+  ActiveStatus: "No",
+  StatusMessage: "No"
 }

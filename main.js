@@ -8,7 +8,8 @@ const bot = new aoijs.AoiClient({
 token: setting.BotToken,
 prefix: setting.BotPrefix,
 intents: ["MessageContent", "Guilds", "GuildMembers", "GuildMessages", "GuildBans", "GuildEmojisAndStickers", "GuildIntegrations", "GuildWebhooks", "GuildInvites", "GuildVoiceStates", "GuildPresences", "GuildMessageReactions", "GuildMessageTyping", "DirectMessages", "DirectMessageReactions", "DirectMessageTyping"],
-disableLogs: true,
+events: ["onMessage", "onInteractionCreate", "onMessageDelete"],
+aoiLogs: false,
 suppressAllErrors: true,
  database: {
   type : "aoi.db",
@@ -32,10 +33,6 @@ suppressAllErrors: true,
   }
 }
 })
-
-// Callbacks
-bot.onMessage()
-bot.onInteractionCreate()
 
 // Loader
 const loader = new aoijs.LoadCommands(bot)
@@ -68,25 +65,25 @@ loader.setColors({
 bot.variables(require("./variables.js"));
 
 // Custom Functions:
+const Interpreter = require("./node_modules/aoi.js/src/interpreter.js");
+const {CheckCondition} = require("./node_modules/aoi.js/src/utils/helpers/checkCondition.js");
+const {mustEscape} = require("./node_modules/aoi.js/src/utils/helpers/mustEscape.js");
+
 bot.functionManager.createFunction({
- name: "$httpStatus",
+ name: "$if",
  type: "djs",
- code: async d => {
- const data = d.util.aoiFunc(d)
- const [url] = data.inside.splits
- var request = require('axios');
-await request.get(url).then((response) => {
- data.result = response.status
- }).catch(function(error) {
- if(error.response) {
- data.result = error.response.status
- }
- else {
- data.result = error
- }
- })
-return {
- code: d.util.setCode(data)
- }
- }
- })
+ code: async (d) => {
+    const data = d.util.aoiFunc(d);
+    if (data.err) return d.error(data.err);
+
+    const [condition, truecon,falsecon] = data.inside.splits;
+
+    const res = eval(CheckCondition.solve(mustEscape(condition)))
+
+    data.result = res ? truecon : falsecon;
+    
+    return {
+        code: d.util.setCode(data),
+    }
+}
+})

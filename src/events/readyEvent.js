@@ -7,7 +7,7 @@ $log[
    Client ID: $clientID
    Owner: $userTag[$botOwnerID]
    Commands: $commandsCount
-   Servers: $serverCount
+   Servers: $guildCount
   ╰─━━━━━━━━━━━━━━━━━━━━━━━━━━━━─╯
 ]
 `
