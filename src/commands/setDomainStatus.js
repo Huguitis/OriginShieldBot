@@ -46,16 +46,14 @@ $setMessageVar[StatusMessage;Yes;$get[MessageID]]
 
 $setTimeout[DomainStatus;$textInputValue[updatesInput];{"GuildID": "$guildID", "ChannelID": "$findGuildChannel[$textInputValue[channelInput];true;$guildID]", "MessageID": "$get[MessageID]", "UserID": "$authorID", "Domain": "$textInputValue[domainInput]", "Every": "$textInputValue[updatesInput]"}]
 
-$let[MessageID;$channelSendMessage[$findGuildChannel[$textInputValue[channelInput];true;$guildID];{newEmbed:{timestamp}{color:Green}{footer:Updates every $textInputValue[updatesInput]}{description:
- > **\`$textInputValue[domainInput]\` live stats:**
-  
- **- __Total Requests:__** $getObjectProperty[requestCounter]
- **- __2xx Responses:__** $getObjectProperty[responses2xx]
- **- __3xx Responses:__** $getObjectProperty[responses3xx]
- **- __4xx Responses:__** $getObjectProperty[responses4xx]
- **- __5xx Responses:__** $getObjectProperty[responses5xx]
-  
- **- __Requests per second:__** $httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/requests/$textInputValue[domainInput];GET;;requestPerSecond;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]}};true]]
+$let[MessageID;$channelSendMessage[$findGuildChannel[$textInputValue[channelInput];true;$guildID];{newEmbed:{description:> **\`$textInputValue[domainInput]\` live stats:**}{timestamp}{color:Green}{thumbnail:$guildIcon}{footer:Updates every $textInputValue[updatesInput]}
+
+{field:Total Requests:\`\`\`$getObjectProperty[requestCounter]\`\`\`:yes}
+{field:2xx Responses:\`\`\`$getObjectProperty[responses2xx]\`\`\`:yes}
+{field:3xx Responses:\`\`\`$getObjectProperty[responses3xx]\`\`\`:yes}
+{field:4xx Responses:\`\`\`$getObjectProperty[responses4xx]\`\`\`:yes}
+{field:5xx Responses:\`\`\`$getObjectProperty[responses5xx]\`\`\`:yes}
+{field:Requests per second:\`\`\`$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/requests/$textInputValue[domainInput];GET;;requestPerSecond;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]\`\`\`:no}};true]]
 
 $createObject[$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort]/api/stats/$filterMessage[$nonEscape[$textInputValue[domainInput]];https://;http://];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey]"}]]
 
@@ -90,19 +88,18 @@ type: "timeout",
 code: `
 $setTimeout[DomainStatus;$timeoutData[Every];{"GuildID": "$timeoutData[GuildID]", "ChannelID": "$timeoutData[ChannelID]", "MessageID": "$timeoutData[MessageID]", "UserID": "$timeoutData[UserID]", "Domain": "$timeoutData[Domain]", "Every": "$timeoutData[Every]"}]
 
-$editMessage[$timeoutData[MessageID];{newEmbed:{timestamp}{color:Green}{footer:Updates every $timeoutData[Every]}{description:
-> **\`$timeoutData[Domain]\` live stats:**
-  
-**- __Total Requests:__** $getObjectProperty[requestCounter]
-**- __2xx Responses:__** $getObjectProperty[responses2xx]
-**- __3xx Responses:__** $getObjectProperty[responses3xx]
-**- __4xx Responses:__** $getObjectProperty[responses4xx]
-**- __5xx Responses:__** $getObjectProperty[responses5xx]
-  
-**- __Requests per second:__** $httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort;$timeoutData[UserID]]/api/requests/$timeoutData[Domain];GET;;requestPerSecond;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey;$timeoutData[UserID]]"}]
-}};$timeoutData[ChannelID]]
+$editMessage[$timeoutData[MessageID];{newEmbed:{description:> **\`$timeoutData[Domain]\` live stats:**}{timestamp}{color:Green}{thumbnail:$guildIcon[$timeoutData[GuildID]]}{footer:Updates every $timeoutData[Every]}
+
+{field:Total Requests:\`\`\`$getObjectProperty[requestCounter]\`\`\`:yes}
+{field:2xx Responses:\`\`\`$getObjectProperty[responses2xx]\`\`\`:yes}
+{field:3xx Responses:\`\`\`$getObjectProperty[responses3xx]\`\`\`:yes}
+{field:4xx Responses:\`\`\`$getObjectProperty[responses4xx]\`\`\`:yes}
+{field:5xx Responses:\`\`\`$getObjectProperty[responses5xx]\`\`\`:yes}
+{field:Requests per second:\`\`\`$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort;$timeoutData[UserID]]/api/requests/$timeoutData[Domain];GET;;requestPerSecond;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey;$timeoutData[UserID]]"}]\`\`\`:no}};$timeoutData[ChannelID]]
 
 $createObject[$httpRequest[http://api.originshield.net:$getGlobalUserVar[OriginShieldApiPort;$timeoutData[UserID]]/api/stats/$timeoutData[Domain];GET;;;;{"Authorization": "Bearer $getGlobalUserVar[OriginShieldApiKey;$timeoutData[UserID]]"}]]
+
+$onlyIf[$messageExists[$timeoutData[MessageID];$timeoutData[ChannelID]]!=false;]
 
 $onlyIf[$getGuildVar[ActiveStatus;$timeoutData[GuildID]]!=No;]
 `
